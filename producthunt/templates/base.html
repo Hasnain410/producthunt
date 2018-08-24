@@ -36,8 +36,20 @@
             <a class="nav-item nav-link text-dark" href="">Jobs</a>
             <a class="nav-item nav-link text-dark" href="">Events</a>
             <a class="nav-item nav-link text-dark" href="">...</a>
-            <a class="nav-item nav-link text-dark" href="">LOGIN</a>
-            <a class="nav-item nav-link text-dark" href="">SIGN UP</a>
+            {% if user.is_authenticated %}
+            <a class="nav-item nav-link text-dark" href="javascript:{document.getElementById('logout').submit()}">LOGOUT</a>
+            <form id="logout" method="POST" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <input type="hidden"/>
+            </form>
+
+
+
+            {% else %}
+            <a class="nav-item nav-link text-dark" href="{% url 'login' %}">LOGIN</a>
+            <a class="nav-item nav-link text-dark" href="{% url 'signup' %}">SIGN UP</a>
+
+            {% endif %}
           </div>
         </div>
         </div>
